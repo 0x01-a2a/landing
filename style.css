@@ -1,0 +1,233 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #080808;
+  --surface: #111111;
+  --border:  #222222;
+  --dim:     #555555;
+  --text:    #cccccc;
+  --bright:  #eeeeee;
+  --green:   #00e676;
+  --mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--green); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ── */
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 120px 0 80px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-logo {
+  font-size: clamp(48px, 10vw, 80px);
+  font-weight: 700;
+  color: var(--bright);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-logo span {
+  color: var(--green);
+}
+
+.hero-rule {
+  color: var(--dim);
+  margin: 20px 0;
+  letter-spacing: 0.5px;
+}
+
+.hero-tagline {
+  font-size: 18px;
+  color: var(--bright);
+  margin-bottom: 40px;
+  max-width: 480px;
+}
+
+.install {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--green);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  user-select: all;
+}
+
+.install:hover { border-color: var(--green); }
+
+.install .prompt { color: var(--dim); }
+
+.copy-hint {
+  display: inline-block;
+  margin-left: 16px;
+  font-size: 11px;
+  color: var(--dim);
+  vertical-align: middle;
+}
+
+/* ── Sections ── */
+section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 32px;
+}
+
+/* ── What ── */
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 540px) {
+  .what-grid { grid-template-columns: 1fr; }
+}
+
+.what-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.what-item-title {
+  color: var(--green);
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.what-item-desc {
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── Code ── */
+.code-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.code-bar {
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--dim);
+  display: flex;
+  justify-content: space-between;
+}
+
+pre {
+  padding: 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.kw  { color: #82aaff; }  /* keyword */
+.str { color: #c3e88d; }  /* string */
+.cm  { color: var(--dim); }  /* comment */
+.fn  { color: #ffcb6b; }  /* function */
+.obj { color: var(--green); } /* type/object */
+
+/* ── Protocol ── */
+.proto-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.proto-list li {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.proto-list .tag {
+  color: var(--green);
+  min-width: 120px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.proto-list .desc {
+  color: var(--text);
+  font-size: 13px;
+}
+
+/* ── Links ── */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--text);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.link-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+  text-decoration: none;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--dim);
+  font-size: 12px;
+}
+
+footer a { color: var(--dim); }
+footer a:hover { color: var(--text); }

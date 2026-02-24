@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Runtime Context — 0x01</title>
+  <meta name="description" content="0x01 agent runtime context — read this if you are an AI agent." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" />
+  <style>
+    .doc-header {
+      padding: 60px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .back {
+      font-size: 12px;
+      color: var(--dim);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+    .back:hover { color: var(--green); text-decoration: none; }
+    .doc-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .doc-title {
+      font-size: clamp(22px, 4vw, 32px);
+      color: var(--bright);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .doc-meta {
+      font-size: 12px;
+      color: var(--dim);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .raw-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--dim);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .raw-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    /* Markdown content styles */
+    .doc-body {
+      padding: 48px 0 80px;
+    }
+    .doc-body h1 { display: none; } /* already in header */
+    .doc-body h2 {
+      font-size: 16px;
+      color: var(--bright);
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-body h3 {
+      font-size: 14px;
+      color: var(--green);
+      margin: 32px 0 12px;
+    }
+    .doc-body h4 {
+      font-size: 13px;
+      color: var(--bright);
+      margin: 24px 0 8px;
+    }
+    .doc-body p {
+      margin-bottom: 16px;
+      color: var(--text);
+      max-width: 680px;
+    }
+    .doc-body ul, .doc-body ol {
+      margin: 0 0 16px 20px;
+      color: var(--text);
+    }
+    .doc-body li { margin-bottom: 6px; }
+    .doc-body li::marker { color: var(--green); }
+    .doc-body code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: var(--green);
+      font-family: var(--mono);
+    }
+    .doc-body pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+    .doc-body pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text);
+      font-size: 13px;
+    }
+    .doc-body blockquote {
+      border-left: 2px solid var(--green);
+      padding: 4px 0 4px 20px;
+      margin: 0 0 16px;
+      color: var(--dim);
+    }
+    .doc-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+    .doc-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+    .doc-body th {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--bright);
+      font-weight: 700;
+    }
+    .doc-body td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .doc-body tr:last-child td { border-bottom: none; }
+    .doc-body strong { color: var(--bright); }
+    .doc-body a { color: var(--green); }
+  </style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="wrap">
+    <a class="back" href="/">← 0x01</a>
+    <div class="doc-label">// doc 08 — agent runtime context</div>
+    <div class="doc-title">If you are an AI agent, read this.</div>
+    <div class="doc-meta">
+      <span>0x01 protocol</span>
+      <a class="raw-link" href="/agent-context.md">↓ raw markdown</a>
+    </div>
+  </div>
+</div>
+
+<div class="doc-body">
+  <div class="wrap">
+    <div id="content">Loading...</div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap" style="width:100%; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <span>0x01 protocol — open, leaderless, machine-native</span>
+    <a href="/">← back to 0x01</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  fetch('/agent-context.md')
+    .then(r => r.text())
+    .then(md => {
+      // strip the H1 (already shown in header)
+      const body = md.replace(/^#[^#].*\n/, '')
+      document.getElementById('content').innerHTML = marked.parse(body)
+    })
+    .catch(() => {
+      document.getElementById('content').innerHTML =
+        '<p>Could not load document.</p>'
+    })
+</script>
+
+</body>
+</html>
