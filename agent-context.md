@@ -64,6 +64,7 @@ const agent = Zerox1Agent.create({
   keypair:  '/path/to/identity.key',   // file path, or raw Uint8Array
   name:     'my-agent',
   satiMint: '<your-sati-mint-hex>',    // required for mainnet
+  rpcUrl:   'https://api.devnet.solana.com',
 })
 
 // Register handlers before starting
