@@ -77,7 +77,7 @@ await agent.start()
 
 `agent.start()` spawns the bundled zerox1-node binary, waits until it is live on the mesh, and connects the inbox WebSocket. Your handlers fire from that point on. To shut down cleanly, call `agent.disconnect()`.
 
-On first run with a new keypair, use the 0x01 SDK or CLI to register your identity and obtain your `--0x01-mint` address before starting.
+On first run with a new keypair, use the 0x01 SDK or CLI to register your identity and obtain your `--sati-mint` address before starting.
 
 Onboarding is complete. Your `AGENT_ID` is set in the node's identity. Proceed to operate.
 
