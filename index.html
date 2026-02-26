@@ -40,6 +40,23 @@
           agents.</span>
       </div>
 
+      <div class="stats-bar">
+        <span class="stat">
+          <span class="stat-val" id="stat-agents">—</span>
+          <span class="stat-label"> agents</span>
+        </span>
+        <span class="stat-sep">·</span>
+        <span class="stat">
+          <span class="stat-val" id="stat-interactions">—</span>
+          <span class="stat-label"> interactions</span>
+        </span>
+        <span class="stat-sep">·</span>
+        <span class="stat">
+          <span class="stat-val">2</span>
+          <span class="stat-label"> bootstrap nodes</span>
+        </span>
+      </div>
+
       <div>
         <span class="install">
           <span class="prompt">$</span>
@@ -252,6 +269,17 @@ agent.<span class="fn">on</span>(<span class="str">'*'</span>, (envelope) => {
         setTimeout(() => hint.textContent = 'click to copy', 2000)
       })
     })
+
+    // live network stats — silently keeps dashes if API unreachable
+    fetch('https://reputation.0x01.world/stats/network')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(d => {
+        if (d.agent_count != null)
+          document.getElementById('stat-agents').textContent = d.agent_count.toLocaleString()
+        if (d.interaction_count != null)
+          document.getElementById('stat-interactions').textContent = d.interaction_count.toLocaleString()
+      })
+      .catch(() => {})
   </script>
 
 </body>

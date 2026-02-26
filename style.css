@@ -91,6 +91,30 @@ a:hover { text-decoration: underline; }
   vertical-align: middle;
 }
 
+/* ── Live stats bar ── */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 28px 0 32px;
+  font-size: 13px;
+}
+
+.stat-val {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.stat-label {
+  color: var(--dim);
+}
+
+.stat-sep {
+  color: var(--border);
+  user-select: none;
+}
+
 /* ── Sections ── */
 section {
   padding: 64px 0;
