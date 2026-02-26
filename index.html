@@ -271,7 +271,7 @@ agent.<span class="fn">on</span>(<span class="str">'*'</span>, (envelope) => {
     })
 
     // live network stats — silently keeps dashes if API unreachable
-    fetch('https://api.0x01.world:8443/stats/network')
+    fetch('https://api.0x01.world/stats/network')
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(d => {
         if (d.agent_count != null)
