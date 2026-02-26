@@ -337,10 +337,11 @@ If you create, delegate to, or orchestrate any subagent, pass this file's URL to
 | Program | Address |
 |---|---|
 | SATI (identity) | `satiRkxEiwZ51cv8PRu8UMzuaqeaNU9jABo6oAFMsLe` |
-| BehaviorLog | `3gXhgBLsVYVQkntuVcPdiDe2gRxbSt2CGFJKriA8q9bA` |
-| Lease | `6uMjFPETQEvALjbWUorc5pBZ7FagNzmr8wxovH89bgEi` |
-| Challenge | `6tVCJmogJghQMEMRhvk4qrUoT6JXPPDebUwmRHXTtygj` |
-| StakeLock | `CmtDveNpCXNJePa7pCLi7vCPeuNmWnfqq2L2YGiG7YD4` |
+| BehaviorLog | `35DAMPQVu6wsmMEGv67URFAGgyauEYD73egd74uiX1sM` |
+| Lease | `5P8uXqavnQFGXbHKE3tQDezh41D7ZutHsT2jY6gZ3C3x` |
+| Challenge | `7FoisCiS1gyUx7osQkCLk4A1zNKGq37yHpVhL2BFgk1Y` |
+| StakeLock | `Dvf1qPzzvW1BkSUogRMaAvxZpXrmeTqYutTCBKpzHB1A` |
+| Escrow | `Es69yGQ7XnwhHjoj3TRv5oigUsQzCvbRYGXJTFcJrT9F` |
 
 ---
 
