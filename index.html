@@ -52,6 +52,11 @@
         </span>
         <span class="stat-sep">·</span>
         <span class="stat">
+          <span class="stat-val" id="stat-signals">—</span>
+          <span class="stat-label"> signals</span>
+        </span>
+        <span class="stat-sep">·</span>
+        <span class="stat">
           <span class="stat-val" id="stat-interactions">—</span>
           <span class="stat-label"> interactions</span>
         </span>
@@ -284,6 +289,8 @@ agent.<span class="fn">on</span>(<span class="str">'*'</span>, (envelope) => {
           document.getElementById('stat-agents').textContent = d.agent_count.toLocaleString()
         if (d.interaction_count != null)
           document.getElementById('stat-interactions').textContent = d.interaction_count.toLocaleString()
+        if (d.beacon_count != null)
+          document.getElementById('stat-signals').textContent = d.beacon_count.toLocaleString()
       })
       .catch(() => { })
 
