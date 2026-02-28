@@ -54,6 +54,9 @@
         <span class="stat">
           <span class="stat-val" id="stat-signals">—</span>
           <span class="stat-label"> signals</span>
+          <span id="stat-bpm-wrap" style="display:none; color:var(--green); font-size:10px; margin-left:4px;">
+            (<span id="stat-bpm">0</span>/min)
+          </span>
         </span>
         <span class="stat-sep">·</span>
         <span class="stat">
@@ -264,6 +267,8 @@ agent.<span class="fn">on</span>(<span class="str">'*'</span>, (envelope) => {
     <div class="wrap" style="width:100%; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
       <span>0x01 protocol — open, leaderless, machine-native</span>
       <span>
+        <a href="/privacy.html">Privacy</a>
+        &nbsp;·&nbsp;
         <a href="https://github.com/0x01-a2a/node/blob/main/LICENSE">MIT</a>
         &nbsp;·&nbsp;
         <a href="https://github.com/0x01-a2a">0x01-a2a</a>
@@ -291,6 +296,10 @@ agent.<span class="fn">on</span>(<span class="str">'*'</span>, (envelope) => {
           document.getElementById('stat-interactions').textContent = d.interaction_count.toLocaleString()
         if (d.beacon_count != null)
           document.getElementById('stat-signals').textContent = d.beacon_count.toLocaleString()
+        if (d.beacon_bpm != null && d.beacon_bpm > 0) {
+          document.getElementById('stat-bpm').textContent = (d.beacon_bpm).toLocaleString()
+          document.getElementById('stat-bpm-wrap').style.display = 'inline'
+        }
       })
       .catch(() => { })
 
