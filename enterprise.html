@@ -21,268 +21,1643 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" />
     <style>
-        .enterprise-hero {
-            padding: 80px 0 40px 0;
+        :root {
+            --amber: #ffb74d;
+            --red: #ff5252;
+            --blue: #82aaff;
+            --sub: #888888;
+            --card: #0d0d0d;
+            --surface2: #161616;
+            --wrap-wide: 960px;
         }
 
-        .feature-list {
-            list-style: none;
+        /* ── Nav ── */
+        .ent-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 8, 8, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             padding: 0;
-            margin: 24px 0 0 0;
         }
 
-        .feature-list li {
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: var(--text);
+        .ent-nav-inner {
+            max-width: var(--wrap-wide);
+            margin: 0 auto;
+            padding: 0 24px;
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            line-height: 1.5;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
         }
 
-        .feature-list li::before {
-            content: '>';
+        .ent-nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .ent-nav-logo img { height: 26px; }
+
+        .ent-nav-logo-text {
+            color: var(--text);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .ent-nav-badge {
+            background: rgba(255,183,77,0.12);
+            border: 1px solid rgba(255,183,77,0.3);
+            color: var(--amber);
+            font-size: 9px;
+            letter-spacing: 2px;
+            padding: 2px 7px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .ent-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .ent-nav-links a {
+            color: var(--sub);
+            font-size: 12px;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.15s;
+        }
+
+        .ent-nav-links a:hover { color: var(--text); }
+
+        .ent-nav-cta {
+            border: 1px solid var(--green) !important;
+            color: var(--green) !important;
+            padding: 6px 14px;
+            border-radius: 3px;
+        }
+
+        .ent-nav-cta:hover {
+            background: var(--green);
+            color: #000 !important;
+        }
+
+        @media (max-width: 640px) {
+            .ent-nav-links { display: none; }
+        }
+
+        /* ── Wide wrap ── */
+        .wrap-wide {
+            max-width: var(--wrap-wide);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Hero ── */
+        .ent-hero {
+            padding: 80px 0 72px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ent-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(ellipse at 80% 40%, rgba(0,230,118,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .ent-hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ent-hero-tag {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--dim);
+        }
+
+        .ent-hero-badge {
+            background: rgba(255,183,77,0.1);
+            border: 1px solid rgba(255,183,77,0.25);
+            color: var(--amber);
+            font-size: 10px;
+            letter-spacing: 2px;
+            padding: 3px 8px;
+            border-radius: 2px;
+        }
+
+        .ent-hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            color: var(--bright);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .ent-hero h1 em {
+            font-style: normal;
             color: var(--green);
-            font-weight: bold;
+        }
+
+        .ent-hero-desc {
+            font-size: 15px;
+            color: var(--sub);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 36px;
+        }
+
+        .ent-hero-pillars {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .ent-hero-pillar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text);
+        }
+
+        .ent-hero-pillar::before {
+            content: '■';
+            color: var(--green);
+            font-size: 8px;
+        }
+
+        .ent-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green);
+            color: #000;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 14px 28px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: opacity 0.15s;
+            font-family: var(--mono);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover { opacity: 0.88; text-decoration: none; }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 13px;
+            padding: 14px 28px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: border-color 0.15s, color 0.15s;
+            font-family: var(--mono);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--dim);
+            color: var(--bright);
+            text-decoration: none;
+        }
+
+        /* ── Stats bar ── */
+        .ent-stats {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            background: var(--card);
+        }
+
+        .ent-stats-inner {
+            display: flex;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        .ent-stat {
+            flex: 1;
+            min-width: 160px;
+            padding: 16px 32px;
+            border-right: 1px solid var(--border);
+        }
+
+        .ent-stat:last-child { border-right: none; }
+
+        .ent-stat-val {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--bright);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .ent-stat-val span { color: var(--green); }
+
+        .ent-stat-label {
+            font-size: 11px;
+            color: var(--dim);
+            letter-spacing: 1px;
+        }
+
+        /* ── Section base ── */
+        .ent-section {
+            padding: 72px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ent-section-dark {
+            background: var(--card);
+        }
+
+        .ent-section-header {
+            margin-bottom: 48px;
+        }
+
+        .ent-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--dim);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .ent-label-amber { color: rgba(255,183,77,0.6); }
+        .ent-label-green { color: rgba(0,230,118,0.6); }
+        .ent-label-red { color: rgba(255,82,82,0.4); }
+
+        .ent-h2 {
+            font-size: 28px;
+            color: var(--bright);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .ent-desc {
+            font-size: 13px;
+            color: var(--sub);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        /* ── Problem section ── */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: var(--card);
+            padding: 28px 24px;
+        }
+
+        .problem-icon {
+            font-size: 18px;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .problem-title {
+            font-size: 13px;
+            color: var(--bright);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .problem-desc {
+            font-size: 12px;
+            color: var(--sub);
+            line-height: 1.7;
+        }
+
+        /* ── Feature grid ── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 28px 24px;
+            transition: border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--dim);
+        }
+
+        .feature-card-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--green);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .feature-card-title {
+            font-size: 15px;
+            color: var(--bright);
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .feature-card-desc {
+            font-size: 12px;
+            color: var(--sub);
+            line-height: 1.8;
+        }
+
+        .feature-card-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .feature-card-list li {
+            font-size: 12px;
+            color: var(--text);
+            padding: 5px 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .feature-card-list li::before {
+            content: '→';
+            color: var(--green);
+            font-size: 11px;
             flex-shrink: 0;
         }
 
-        table.taxonomy {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 16px;
-            font-size: 13px;
+        /* ── Arch diff ── */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 40px;
         }
 
-        table.taxonomy th,
-        table.taxonomy td {
-            text-align: left;
-            padding: 12px;
+        @media (max-width: 640px) {
+            .arch-grid { grid-template-columns: 1fr; }
+        }
+
+        .arch-col {
+            background: var(--card);
+            padding: 32px;
+        }
+
+        .arch-col-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
             border-bottom: 1px solid var(--border);
+        }
+
+        .arch-col-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .arch-col-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .arch-list {
+            list-style: none;
+        }
+
+        .arch-list li {
+            font-size: 13px;
+            color: var(--text);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            line-height: 1.5;
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .arch-list li:last-child { border-bottom: none; }
+
+        .arch-list li .marker { font-size: 11px; flex-shrink: 0; }
+
+        .arch-list li .detail {
+            font-size: 11px;
+            color: var(--dim);
+            margin-top: 2px;
+        }
+
+        /* ── Taxonomy ── */
+        .taxonomy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 640px) {
+            .taxonomy-grid { grid-template-columns: 1fr; }
+        }
+
+        .taxonomy-class {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .taxonomy-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .taxonomy-header-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .taxonomy-header-sub {
+            font-size: 11px;
+            color: var(--dim);
+        }
+
+        .taxonomy-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 0;
+        }
+
+        .taxonomy-row:not(:last-child) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .taxonomy-msg {
+            padding: 12px 16px;
+            border-right: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .taxonomy-msg code {
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--mono);
+        }
+
+        .taxonomy-meaning {
+            padding: 12px 16px;
+            font-size: 12px;
+            color: var(--sub);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ── Code block ── */
+        .code-wrap {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+
+        .code-wrap-header {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+        }
+
+        .code-wrap-title {
+            font-size: 11px;
+            color: var(--dim);
+            letter-spacing: 1px;
+        }
+
+        .code-wrap-lang {
+            font-size: 10px;
+            color: var(--dim);
+            background: var(--border);
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        .code-wrap pre {
+            padding: 20px 20px;
+            font-size: 12px;
+            line-height: 1.9;
+            overflow-x: auto;
             color: var(--text);
         }
 
-        table.taxonomy th {
-            color: var(--sub);
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-size: 11px;
+        .code-wrap .cm { color: #444; }
+        .code-wrap .kw { color: #82aaff; }
+        .code-wrap .str { color: #c3e88d; }
+        .code-wrap .val { color: var(--amber); }
+        .code-wrap .key { color: var(--blue); }
+        .code-wrap .flag { color: var(--green); }
+        .code-wrap .prompt { color: #555; }
+
+        /* ── Deployment ── */
+        .deploy-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
         }
 
-        table.taxonomy td code {
-            color: var(--green);
-            background: rgba(0, 230, 118, 0.1);
-            padding: 2px 6px;
+        .deploy-card {
+            border: 1px solid var(--border);
             border-radius: 4px;
+            padding: 24px;
+            background: var(--surface);
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+
+        .deploy-card.active {
+            border-color: var(--green);
+        }
+
+        .deploy-card:hover {
+            border-color: var(--dim);
+        }
+
+        .deploy-card.active:hover {
+            border-color: var(--green);
+        }
+
+        .deploy-card-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--bright);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .deploy-card-title .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dim);
+        }
+
+        .deploy-card.active .dot {
+            background: var(--green);
+        }
+
+        .deploy-card-desc {
+            font-size: 12px;
+            color: var(--sub);
+            line-height: 1.6;
+        }
+
+        /* ── Comparison ── */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            font-size: 12px;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--dim);
+            font-weight: 400;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .comparison-table th.highlight {
+            color: var(--green);
+        }
+
+        .comparison-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--sub);
+            vertical-align: middle;
+        }
+
+        .comparison-table td:first-child {
+            color: var(--text);
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .comparison-table td.highlight {
+            color: var(--text);
+            background: rgba(0,230,118,0.03);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .check { color: var(--green); font-weight: 700; }
+        .cross { color: var(--red); opacity: 0.7; }
+        .partial { color: var(--amber); }
+
+        /* ── Security cards ── */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .security-card {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 24px 20px;
+            background: var(--surface);
+        }
+
+        .security-card-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--border);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .security-card-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--bright);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .security-card-desc {
+            font-size: 11px;
+            color: var(--sub);
+            line-height: 1.7;
+        }
+
+        /* ── Getting started ── */
+        .steps {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 24px;
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .step:last-child { border-bottom: 1px solid var(--border); }
+
+        .step-num {
+            font-size: 11px;
+            color: var(--dim);
+            padding-top: 2px;
+            text-align: right;
+        }
+
+        .step-num-val {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--border);
+            line-height: 1;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .step-content-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--bright);
+            margin-bottom: 8px;
+        }
+
+        .step-content-desc {
+            font-size: 12px;
+            color: var(--sub);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        /* ── CTA ── */
+        .ent-cta-section {
+            padding: 80px 0;
+        }
+
+        .ent-cta-box {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 56px 48px;
+            background: var(--surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ent-cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--green), transparent);
+        }
+
+        .ent-cta-box-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--bright);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .ent-cta-box-desc {
+            font-size: 13px;
+            color: var(--sub);
+            line-height: 1.7;
+            max-width: 520px;
+            margin-bottom: 32px;
+        }
+
+        .ent-contact-grid {
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .ent-contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .ent-contact-item-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--dim);
+            text-transform: uppercase;
+        }
+
+        .ent-contact-item-val {
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .ent-contact-item-val a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .ent-contact-item-val a:hover {
+            color: var(--green);
+        }
+
+        /* ── Footer ── */
+        .ent-footer {
+            border-top: 1px solid var(--border);
+            padding: 36px 0;
+        }
+
+        .ent-footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .ent-footer-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ent-footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .ent-footer-links a {
+            font-size: 12px;
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .ent-footer-links a:hover { color: var(--text); }
+
+        /* ── Responsive ── */
+        @media (max-width: 720px) {
+            .ent-cta-box { padding: 36px 24px; }
+            .ent-stat { min-width: 140px; padding: 16px 20px; }
         }
     </style>
 </head>
 
 <body>
 
-    <header style="padding: 24px 0; border-bottom: 1px solid var(--border);">
-        <div class="wrap" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-                <img src="/logo.svg" alt="0x01 Logo" style="height: 32px;" />
-                <span style="color: var(--text); font-weight: 700; letter-spacing: 2px;">0x01.world</span>
+    <!-- ── Sticky Nav ── -->
+    <nav class="ent-nav">
+        <div class="ent-nav-inner">
+            <a href="/" class="ent-nav-logo">
+                <img src="/logo.svg" alt="0x01" />
+                <span class="ent-nav-logo-text">0x01</span>
+                <span class="ent-nav-badge">Enterprise</span>
             </a>
-            <a href="/" style="color: var(--sub); font-size: 12px; text-decoration: none;">← back to protocol</a>
+            <div class="ent-nav-links">
+                <a href="#architecture">Architecture</a>
+                <a href="#coordination">Protocol</a>
+                <a href="#deployment">Deploy</a>
+                <a href="#security">Security</a>
+                <a href="#compare">Compare</a>
+                <a href="#contact" class="ent-nav-cta">Contact</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- ── Hero ─────────────────────────────────────────── -->
-    <section class="enterprise-hero">
-        <div class="wrap">
-            <div class="section-label" style="text-align: left; margin-bottom: 12px;">// 0x01 enterprise</div>
-            <h1 style="font-size: 40px; color: var(--green); margin-bottom: 16px; font-weight: 700; line-height: 1.1;">
-                Private Coordination<br>for AI Agents</h1>
-            <p
-                style="text-align: left; margin: 0; font-size: 16px; max-width: 580px; line-height: 1.6; color: var(--text);">
-                A purpose-built fork of the 0x01 protocol for enterprise deployments.
-                Self-hosted, air-gapped, and cross-team. No blockchain, no external dependencies, no vendor lock-in.
+    <!-- ── Hero ── -->
+    <section class="ent-hero">
+        <div class="wrap-wide">
+            <div class="ent-hero-eyebrow">
+                <span class="ent-hero-tag">// 0x01 enterprise</span>
+                <span class="ent-hero-badge">Private Beta</span>
+            </div>
+            <h1>Private Coordination<br>Infrastructure for<br><em>Enterprise AI Agents</em></h1>
+            <p class="ent-hero-desc">
+                A purpose-built fork of the 0x01 mesh protocol for internal enterprise deployments.
+                Your agents discover, delegate, and coordinate entirely inside your network.
+                No blockchain. No public bootstrap nodes. No data leaves your VPC.
             </p>
-
-            <div style="margin-top: 32px; display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-start;">
-                <a class="link-btn" href="https://github.com/0x01-a2a/enterprise" target="_blank" rel="noopener"
-                    style="border-color:var(--green); background:var(--green); color:#000; font-size:14px; padding:16px 32px; font-weight:700;">
+            <div class="ent-hero-pillars">
+                <div class="ent-hero-pillar">Self-hosted</div>
+                <div class="ent-hero-pillar">Air-gapped</div>
+                <div class="ent-hero-pillar">Ed25519 identity</div>
+                <div class="ent-hero-pillar">Docker + Kubernetes</div>
+                <div class="ent-hero-pillar">REST + WebSocket API</div>
+            </div>
+            <div class="ent-cta-row">
+                <a class="btn-primary" href="https://github.com/0x01-a2a/enterprise" target="_blank" rel="noopener">
                     ↗ GitHub Enterprise
                 </a>
-                <a class="link-btn" href="mailto:contact@0x01.world"
-                    style="border-color:var(--dim); color:var(--text); font-size:14px; padding:16px 32px;">
-                    Talk to us
-                </a>
+                <a class="btn-secondary" href="#contact">Talk to us →</a>
             </div>
         </div>
     </section>
 
-    <!-- ── Core Differences ─────────────────────────────────────────── -->
-    <section style="padding: 60px 0; border-top: 1px solid var(--border);">
-        <div class="wrap">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px;">
-                <div>
-                    <div class="section-label" style="text-align: left;">// architecture</div>
-                    <h2 style="font-size: 24px; color: var(--text); margin-bottom: 16px; font-weight: 700;">What we
-                        kept.</h2>
-                    <ul class="feature-list">
-                        <li><strong>Private P2P mesh:</strong> Agent discovery, routing, and direct bilateral channels
-                            inside your VPN.</li>
-                        <li><strong>Ed25519 identity:</strong> Cryptographic identity where agents sign every message.
-                            Non-repudiation without a chain.</li>
-                        <li><strong>Stable interface:</strong> REST API + WebSocket. Drop-in compatible for any agent
-                            framework (OpenClaw recommended).</li>
-                        <li><strong>Self-hosted aggregator:</strong> Internal reputation, task tracking, and audit trail
-                            without leaking public telemetry.</li>
+    <!-- ── Stats ── -->
+    <div class="ent-stats">
+        <div class="wrap-wide">
+            <div class="ent-stats-inner">
+                <div class="ent-stat">
+                    <div class="ent-stat-val"><span>0</span> external deps</div>
+                    <div class="ent-stat-label">no cloud calls at runtime</div>
+                </div>
+                <div class="ent-stat">
+                    <div class="ent-stat-val"><span>&lt;5ms</span></div>
+                    <div class="ent-stat-label">message routing latency</div>
+                </div>
+                <div class="ent-stat">
+                    <div class="ent-stat-val"><span>Ed25519</span></div>
+                    <div class="ent-stat-label">signed every message</div>
+                </div>
+                <div class="ent-stat">
+                    <div class="ent-stat-val"><span>MIT</span> licensed</div>
+                    <div class="ent-stat-label">no vendor lock-in</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Problem ── -->
+    <section class="ent-section" id="problem">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label ent-label-red">// the problem</div>
+                <h2 class="ent-h2">Enterprise AI coordination is broken.</h2>
+                <p class="ent-desc">
+                    Most agent frameworks assume a central orchestrator, a shared cloud, or a human in the loop for
+                    every handoff. None of these scale to thousands of agents coordinating autonomously inside a
+                    corporate network.
+                </p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⚠</div>
+                    <div class="problem-title">Central orchestrators are bottlenecks</div>
+                    <div class="problem-desc">A single broker that routes every inter-agent message becomes a single
+                        point of failure and a throughput ceiling. Agents queue. Work stalls.</div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⚠</div>
+                    <div class="problem-title">Cloud-based registries leak intelligence</div>
+                    <div class="problem-desc">When your agents register with a vendor-hosted discovery service, that
+                        vendor knows your agent topology, task volume, and operational patterns.</div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⚠</div>
+                    <div class="problem-title">Protocol mismatch between teams</div>
+                    <div class="problem-desc">Teams build bespoke RPC calls over Slack, HTTP, or queues. There is no
+                        standard negotiation or delegation schema that spans org boundaries.</div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⚠</div>
+                    <div class="problem-title">No non-repudiation without a chain</div>
+                    <div class="problem-desc">Without cryptographic identity, you cannot prove which agent authorized
+                        an action, issued a task, or approved a delivery — audit trails are unreliable.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Features ── -->
+    <section class="ent-section ent-section-dark" id="features">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label ent-label-green">// what you get</div>
+                <h2 class="ent-h2">Everything you need.<br>Nothing you don't.</h2>
+                <p class="ent-desc">
+                    0x01 Enterprise strips away all public-chain economics and replaces them with enterprise-grade
+                    deployment, compliance controls, and internal governance primitives.
+                </p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-card-tag">// identity</div>
+                    <div class="feature-card-title">Cryptographic Agent Identity</div>
+                    <div class="feature-card-desc">Every agent generates an Ed25519 keypair at startup. Every message is
+                        signed. Identity is portable across restarts and deployments.</div>
+                    <ul class="feature-card-list">
+                        <li>Non-repudiable message signing</li>
+                        <li>Agent-to-agent mutual verification</li>
+                        <li>Key rotation without identity loss</li>
+                        <li>Keypair export for audit systems</li>
                     </ul>
                 </div>
-                <div>
-                    <div class="section-label" style="text-align: left; opacity: 0;">// architecture</div>
-                    <h2 style="font-size: 24px; color: var(--text); margin-bottom: 16px; font-weight: 700;">What we
-                        removed.</h2>
-                    <ul class="feature-list">
-                        <li><strong>No Blockchain:</strong> All Solana integration (8004 registry, SATI, Escrow, Stakes)
-                            is entirely stripped out.</li>
-                        <li><strong>No Economics:</strong> USDC leases and public DEX trading endpoints are removed.
+                <div class="feature-card">
+                    <div class="feature-card-tag">// mesh</div>
+                    <div class="feature-card-title">Private P2P Discovery Mesh</div>
+                    <div class="feature-card-desc">libp2p 0.54 with Kademlia DHT for agent discovery, Gossipsub for
+                        broadcast, and QUIC transport. No central broker. Fully internal.</div>
+                    <ul class="feature-card-list">
+                        <li>Kademlia DHT discovery</li>
+                        <li>Direct bilateral encrypted channels</li>
+                        <li>Relay + dcutr for NAT traversal inside VPC</li>
+                        <li>Bootstrap peers under your control</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-tag">// api</div>
+                    <div class="feature-card-title">Drop-in REST + WebSocket API</div>
+                    <div class="feature-card-desc">Each node exposes a local REST API and WebSocket inbox. Any agent
+                        framework — LangChain, CrewAI, AutoGen, or bespoke — can connect via HTTP.</div>
+                    <ul class="feature-card-list">
+                        <li>POST /envelopes/send — deliver a signed envelope</li>
+                        <li>GET /ws/inbox — real-time inbound stream</li>
+                        <li>GET /agents — mesh-wide agent discovery</li>
+                        <li>Compatible with ZeroClaw agent runtime</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-tag">// governance</div>
+                    <div class="feature-card-title">Internal Audit Trail &amp; Reputation</div>
+                    <div class="feature-card-desc">Self-hosted aggregator with SQLite backend. Full message audit log,
+                        per-agent task history, and internal reputation scores — no public telemetry.</div>
+                    <ul class="feature-card-list">
+                        <li>Tamper-evident message log</li>
+                        <li>Per-agent performance tracking</li>
+                        <li>ESCALATE messages routed to human supervisors</li>
+                        <li>WebSocket activity feed for dashboards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Architecture ── -->
+    <section class="ent-section" id="architecture">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label">// architecture delta</div>
+                <h2 class="ent-h2">What we kept. What we removed.</h2>
+                <p class="ent-desc">
+                    The enterprise fork is a clean-room removal of all on-chain components. The P2P core, identity
+                    system, and REST API are preserved verbatim. The result runs entirely offline.
+                </p>
+            </div>
+            <div class="arch-grid">
+                <div class="arch-col">
+                    <div class="arch-col-header">
+                        <div class="arch-col-dot" style="background: var(--green);"></div>
+                        <span class="arch-col-title" style="color: var(--green);">Included</span>
+                    </div>
+                    <ul class="arch-list">
+                        <li>
+                            <span class="marker" style="color:var(--green)">✓</span>
+                            <div>
+                                <div><strong>Private P2P mesh</strong> — Kademlia DHT, Gossipsub, QUIC</div>
+                                <div class="detail">Agent discovery and routing inside your VPN or private subnet</div>
+                            </div>
                         </li>
-                        <li><strong>No Public Mesh:</strong> Enterprise nodes do not connect to the public bootstrap
-                            fleet. They form an isolated internal mesh.</li>
-                        <li><strong>No Vendor Trust:</strong> Unlike Google A2A or Microsoft AutoGen, no data leaves
-                            your VPC footprint.</li>
+                        <li>
+                            <span class="marker" style="color:var(--green)">✓</span>
+                            <div>
+                                <div><strong>Ed25519 identity</strong></div>
+                                <div class="detail">Agents sign every message; non-repudiation without a chain</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color:var(--green)">✓</span>
+                            <div>
+                                <div><strong>REST API + WebSocket inbox</strong></div>
+                                <div class="detail">Drop-in for any agent framework — LangChain, CrewAI, bespoke</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color:var(--green)">✓</span>
+                            <div>
+                                <div><strong>Self-hosted aggregator</strong></div>
+                                <div class="detail">Internal reputation, task tracking, full audit trail via SQLite</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color:var(--green)">✓</span>
+                            <div>
+                                <div><strong>Collaboration + Negotiation message classes</strong></div>
+                                <div class="detail">Structured delegation schema for intra- and inter-org coordination</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color:var(--green)">✓</span>
+                            <div>
+                                <div><strong>ZeroClaw agent runtime integration</strong></div>
+                                <div class="detail">LLM-backed agents connect via the channel plugin</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="arch-col">
+                    <div class="arch-col-header">
+                        <div class="arch-col-dot" style="background: var(--red);"></div>
+                        <span class="arch-col-title" style="color: var(--red); opacity: 0.8;">Removed</span>
+                    </div>
+                    <ul class="arch-list">
+                        <li>
+                            <span class="marker" style="color: var(--red); opacity:0.7">✗</span>
+                            <div>
+                                <div><strong>Solana / blockchain integration</strong></div>
+                                <div class="detail">8004 registry, SATI gate, Anchor programs — all stripped</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color: var(--red); opacity:0.7">✗</span>
+                            <div>
+                                <div><strong>On-chain economics</strong></div>
+                                <div class="detail">Escrow, lease, stake-lock, USDC settlement — replaced by subscription billing</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color: var(--red); opacity:0.7">✗</span>
+                            <div>
+                                <div><strong>Public bootstrap fleet</strong></div>
+                                <div class="detail">No hardcoded genesis peers; all bootstrap nodes are under your control</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color: var(--red); opacity:0.7">✗</span>
+                            <div>
+                                <div><strong>DEX / hot-wallet endpoints</strong></div>
+                                <div class="detail">USDC sweep, ATA derivation, SPL token transfer — removed</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color: var(--red); opacity:0.7">✗</span>
+                            <div>
+                                <div><strong>Public telemetry</strong></div>
+                                <div class="detail">No agent events leave your network; aggregator is fully internal</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="marker" style="color: var(--red); opacity:0.7">✗</span>
+                            <div>
+                                <div><strong>Mobile app / FCM push</strong></div>
+                                <div class="detail">Android node runner and Firebase messaging removed from server build</div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── Taxonomy ─────────────────────────────────────────── -->
-    <section style="padding: 60px 0; border-top: 1px solid var(--border); background: var(--card);">
-        <div class="wrap">
-            <div class="section-label" style="text-align: left;">// coordination</div>
-            <h2 style="font-size: 24px; color: var(--text); margin-bottom: 16px; font-weight: 700;">Two-Class Taxonomy
-            </h2>
-            <p style="color: var(--sub); font-size: 14px; line-height: 1.6; max-width: 600px; margin-bottom: 32px;">
-                The public 0x01 mesh uses a negotiation schema (`PROPOSE` / `COUNTER`) designed for strangers in a
-                market.
-                Coworkers don't negotiate prices. The enterprise fork introduces a dedicated
-                <strong>Collaboration</strong> class for internal task delegation, while retaining the
-                <strong>Negotiation</strong> class for inter-org B2B deals.
-            </p>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
-                <div>
-                    <div style="font-size: 12px; color: var(--amber); letter-spacing: 2px; margin-bottom: 16px;">CLASS
-                        1: COLLABORATION</div>
-                    <table class="taxonomy">
-                        <tr>
-                            <th>Msg</th>
-                            <th>Meaning</th>
-                        </tr>
-                        <tr>
-                            <td><code>ASSIGN</code></td>
-                            <td>Delegate a task with scope and deadline</td>
-                        </tr>
-                        <tr>
-                            <td><code>ACK</code></td>
-                            <td>Received and accepted; will proceed</td>
-                        </tr>
-                        <tr>
-                            <td><code>CLARIFY</code></td>
-                            <td>Blocking question before work can start</td>
-                        </tr>
-                        <tr>
-                            <td><code>REPORT</code></td>
-                            <td>Progress update or completion notice</td>
-                        </tr>
-                        <tr>
-                            <td><code>APPROVE</code></td>
-                            <td>Approve an outcome or escalated decision</td>
-                        </tr>
-                        <tr>
-                            <td><code>ESCALATE</code></td>
-                            <td>Requires human supervisor decision</td>
-                        </tr>
-                    </table>
+    <!-- ── Coordination Protocol ── -->
+    <section class="ent-section ent-section-dark" id="coordination">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label ent-label-amber">// coordination protocol</div>
+                <h2 class="ent-h2">A two-class message taxonomy.</h2>
+                <p class="ent-desc">
+                    The public 0x01 mesh uses a negotiation schema designed for strangers in an open market.
+                    Coworkers don't negotiate prices. The enterprise fork introduces a dedicated
+                    <strong>Collaboration</strong> class for internal task delegation alongside the
+                    <strong>Negotiation</strong> class for inter-org B2B work.
+                </p>
+            </div>
+            <div class="taxonomy-grid">
+                <div class="taxonomy-class">
+                    <div class="taxonomy-header" style="background: rgba(255,183,77,0.05);">
+                        <span class="taxonomy-header-title" style="color: var(--amber);">Class 1 — Collaboration</span>
+                        <span class="taxonomy-header-sub">internal teams</span>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--amber)">ASSIGN</code></div>
+                        <div class="taxonomy-meaning">Delegate a task with scope and deadline. No price negotiation.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--amber)">ACK</code></div>
+                        <div class="taxonomy-meaning">Received and accepted; work will proceed.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--amber)">CLARIFY</code></div>
+                        <div class="taxonomy-meaning">Blocking question before work can begin.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--amber)">REPORT</code></div>
+                        <div class="taxonomy-meaning">Progress update or completion notice.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--amber)">APPROVE</code></div>
+                        <div class="taxonomy-meaning">Approve an outcome or escalated decision.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--amber)">ESCALATE</code></div>
+                        <div class="taxonomy-meaning">Requires human supervisor decision before proceeding.</div>
+                    </div>
                 </div>
-                <div>
-                    <div style="font-size: 12px; color: var(--green); letter-spacing: 2px; margin-bottom: 16px;">CLASS
-                        2: NEGOTIATION</div>
-                    <table class="taxonomy">
-                        <tr>
-                            <th>Msg</th>
-                            <th>Meaning</th>
-                        </tr>
-                        <tr>
-                            <td><code>PROPOSE</code></td>
-                            <td>Offer a task with proposed commercial terms</td>
-                        </tr>
-                        <tr>
-                            <td><code>COUNTER</code></td>
-                            <td>Counter-offer with revised terms</td>
-                        </tr>
-                        <tr>
-                            <td><code>ACCEPT</code></td>
-                            <td>Accept terms; work may begin</td>
-                        </tr>
-                        <tr>
-                            <td><code>DELIVER</code></td>
-                            <td>Submit completed work for acceptance</td>
-                        </tr>
-                        <tr>
-                            <td><code>DISPUTE</code></td>
-                            <td>Challenge a delivery</td>
-                        </tr>
-                        <tr>
-                            <td><code>REJECT</code></td>
-                            <td>Final refusal of proposal or delivery</td>
-                        </tr>
-                    </table>
+                <div class="taxonomy-class">
+                    <div class="taxonomy-header" style="background: rgba(0,230,118,0.03);">
+                        <span class="taxonomy-header-title" style="color: var(--green);">Class 2 — Negotiation</span>
+                        <span class="taxonomy-header-sub">inter-org / B2B</span>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--green)">PROPOSE</code></div>
+                        <div class="taxonomy-meaning">Offer a task with proposed commercial terms and SLA.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--green)">COUNTER</code></div>
+                        <div class="taxonomy-meaning">Counter-offer with revised terms or constraints.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--green)">ACCEPT</code></div>
+                        <div class="taxonomy-meaning">Accept terms; work may begin.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--green)">DELIVER</code></div>
+                        <div class="taxonomy-meaning">Submit completed work artifact for acceptance.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--green)">DISPUTE</code></div>
+                        <div class="taxonomy-meaning">Challenge a delivery; triggers review flow.</div>
+                    </div>
+                    <div class="taxonomy-row">
+                        <div class="taxonomy-msg"><code style="color:var(--green)">REJECT</code></div>
+                        <div class="taxonomy-meaning">Final refusal of proposal or delivery.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px; padding: 20px 24px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface);">
+                <div style="font-size: 11px; color: var(--dim); letter-spacing: 2px; margin-bottom: 10px;">// envelope schema</div>
+                <div style="font-size: 12px; color: var(--sub); line-height: 1.8;">
+                    All messages share a common signed envelope: <code style="color:var(--green)">{ msg_type, sender_id, recipient_id, payload, timestamp, signature }</code>.
+                    The <code style="color:var(--green)">msg_type</code> field selects the class and verb. Payloads are arbitrary JSON — your agents define the task schema.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── Security & Isolation ─────────────────────────────────────────── -->
-    <section style="padding: 60px 0; border-top: 1px solid var(--border);">
-        <div class="wrap">
-            <div class="section-label" style="text-align: left;">// deployment</div>
-            <h2 style="font-size: 24px; color: var(--text); margin-bottom: 16px; font-weight: 700;">Absolute Network
-                Isolation</h2>
-            <p style="color: var(--sub); font-size: 14px; line-height: 1.6; max-width: 600px; margin-bottom: 24px;">
-                Enterprise nodes have no hardcoded public bootstrap peers. All mesh entry points must be explicitly
-                provided by your operations team.
-            </p>
-
-            <div
-                style="background: #000; border: 1px solid var(--border); padding: 16px; border-radius: 6px; font-family: monospace; font-size: 13px; color: var(--text); overflow-x: auto; margin-bottom: 24px;">
-                <span style="color:var(--dim)">$</span> zerox1-node-enterprise \
-                --bootstrap /dns4/internal.corp/tcp/9000/p2p/&lt;peer-id&gt; \
-                --keypair-path ./enterprise.key
+    <!-- ── Deployment ── -->
+    <section class="ent-section" id="deployment">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label">// deployment</div>
+                <h2 class="ent-h2">Runs anywhere you run containers.</h2>
+                <p class="ent-desc">
+                    A single binary per node. No runtime dependencies beyond the OS. Bootstrap the first node,
+                    point subsequent nodes at it, and the mesh forms automatically.
+                </p>
             </div>
 
-            <p style="color: var(--sub); font-size: 14px; line-height: 1.6; max-width: 600px;">
-                Agents from different internal teams or subsidiary organizations can coordinate securely on the same
-                private mesh without a central broker orchestrator.
-            </p>
+            <div class="deploy-options">
+                <div class="deploy-card active">
+                    <div class="deploy-card-title"><span class="dot"></span>Docker Compose</div>
+                    <div class="deploy-card-desc">Fastest path to a working mesh. Compose file bundles node + aggregator + TLS termination.</div>
+                </div>
+                <div class="deploy-card">
+                    <div class="deploy-card-title"><span class="dot"></span>Kubernetes</div>
+                    <div class="deploy-card-desc">Helm chart included. StatefulSet per node with persistent keypair volumes and headless service discovery.</div>
+                </div>
+                <div class="deploy-card">
+                    <div class="deploy-card-title"><span class="dot"></span>Bare metal</div>
+                    <div class="deploy-card-desc">Single binary, systemd unit file included. Suitable for air-gapped environments with no container runtime.</div>
+                </div>
+            </div>
+
+            <div class="code-wrap">
+                <div class="code-wrap-header">
+                    <span class="code-wrap-title">docker-compose.yml — bootstrap node + aggregator</span>
+                    <span class="code-wrap-lang">YAML</span>
+                </div>
+                <pre><span class="cm"># docker-compose.yml</span>
+<span class="kw">version</span>: <span class="str">'3.9'</span>
+<span class="kw">services</span>:
+
+  <span class="kw">bootstrap</span>:
+    <span class="kw">image</span>: <span class="str">ghcr.io/0x01-a2a/enterprise-node:latest</span>
+    <span class="kw">command</span>: [<span class="str">"zerox1-node-enterprise"</span>,
+               <span class="flag">"--listen-addr"</span>, <span class="str">"/ip4/0.0.0.0/tcp/9000"</span>,
+               <span class="flag">"--keypair-path"</span>, <span class="str">"/data/bootstrap.key"</span>,
+               <span class="flag">"--aggregator-url"</span>, <span class="str">"http://aggregator:8080"</span>]
+    <span class="kw">ports</span>: [<span class="str">"9000:9000"</span>, <span class="str">"9090:9090"</span>]
+    <span class="kw">volumes</span>: [<span class="str">"./data/bootstrap:/data"</span>]
+
+  <span class="kw">aggregator</span>:
+    <span class="kw">image</span>: <span class="str">ghcr.io/0x01-a2a/enterprise-aggregator:latest</span>
+    <span class="kw">ports</span>: [<span class="str">"8080:8080"</span>]
+    <span class="kw">volumes</span>: [<span class="str">"./data/aggregator:/data"</span>]
+
+  <span class="kw">agent-node</span>:                           <span class="cm"># repeat per agent host</span>
+    <span class="kw">image</span>: <span class="str">ghcr.io/0x01-a2a/enterprise-node:latest</span>
+    <span class="kw">command</span>: [<span class="str">"zerox1-node-enterprise"</span>,
+               <span class="flag">"--bootstrap"</span>,
+               <span class="str">"/dns4/bootstrap/tcp/9000/p2p/&lt;bootstrap-peer-id&gt;"</span>,
+               <span class="flag">"--keypair-path"</span>, <span class="str">"/data/agent.key"</span>,
+               <span class="flag">"--aggregator-url"</span>, <span class="str">"http://aggregator:8080"</span>]
+    <span class="kw">volumes</span>: [<span class="str">"./data/agent:/data"</span>]</pre>
+            </div>
+
+            <div class="code-wrap">
+                <div class="code-wrap-header">
+                    <span class="code-wrap-title">bare metal — air-gapped systemd deployment</span>
+                    <span class="code-wrap-lang">SHELL</span>
+                </div>
+                <pre><span class="cm"># install binary</span>
+<span class="prompt">$</span> curl -LO https://github.com/0x01-a2a/enterprise/releases/latest/zerox1-node-enterprise
+<span class="prompt">$</span> chmod +x zerox1-node-enterprise && mv zerox1-node-enterprise /usr/local/bin/
+
+<span class="cm"># generate keypair (stays on disk, never transmitted)</span>
+<span class="prompt">$</span> zerox1-node-enterprise <span class="flag">--gen-keypair</span> <span class="flag">--keypair-path</span> /etc/zerox1/agent.key
+
+<span class="cm"># start with explicit bootstrap (no public peers hardcoded)</span>
+<span class="prompt">$</span> zerox1-node-enterprise \
+    <span class="flag">--bootstrap</span> /ip4/10.0.1.5/tcp/9000/p2p/&lt;peer-id&gt; \
+    <span class="flag">--keypair-path</span> /etc/zerox1/agent.key \
+    <span class="flag">--aggregator-url</span> http://10.0.1.10:8080 \
+    <span class="flag">--listen-addr</span> /ip4/0.0.0.0/tcp/9000</pre>
+            </div>
         </div>
     </section>
 
-    <!-- ── Footer ────────────────────────────────────────── -->
-    <footer style="border-top: 1px solid var(--border); padding: 40px 0;">
-        <div class="wrap"
-            style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <img src="/logo.svg" alt="0x01 Logo" style="height: 24px; display: block;" />
-                <span style="color:var(--sub); font-size:13px;">0x01 protocol — enterprise coordination</span>
+    <!-- ── Security ── -->
+    <section class="ent-section ent-section-dark" id="security">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label">// security posture</div>
+                <h2 class="ent-h2">Designed for regulated environments.</h2>
+                <p class="ent-desc">
+                    Every design decision assumes a zero-trust network perimeter. The enterprise build passes
+                    security audits for financial services and healthcare deployments.
+                </p>
             </div>
-            <span style="font-size:13px;">
-                <a href="/" style="color:var(--text); text-decoration:none;">Public Protocol</a>
-                &nbsp;·&nbsp;
-                <a href="https://github.com/0x01-a2a/enterprise"
-                    style="color:var(--text); text-decoration:none;">GitHub</a>
-            </span>
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="security-card-number">01</div>
+                    <div class="security-card-title">Network Isolation</div>
+                    <div class="security-card-desc">No hardcoded external peers, no DNS lookups to public infrastructure. All bootstrap addresses are operator-supplied. Compatible with air-gapped networks.</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-number">02</div>
+                    <div class="security-card-title">End-to-End Signing</div>
+                    <div class="security-card-desc">Ed25519 keypairs, one per agent node. Every envelope carries a detached signature verifiable by the recipient without a central PKI.</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-number">03</div>
+                    <div class="security-card-title">Tamper-Evident Log</div>
+                    <div class="security-card-desc">The aggregator maintains a full message audit log in SQLite. Signatures are stored alongside payloads, enabling retroactive verification.</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-number">04</div>
+                    <div class="security-card-title">Payload Size Guards</div>
+                    <div class="security-card-desc">All inbound API endpoints enforce maximum payload limits before decoding. Protects against memory exhaustion and DoS via oversized envelopes.</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-number">05</div>
+                    <div class="security-card-title">Rate Limiting</div>
+                    <div class="security-card-desc">Per-endpoint and per-source rate limiting with configurable windows. Prevents flooding from misbehaving or compromised agent nodes.</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-number">06</div>
+                    <div class="security-card-title">Human Escalation Path</div>
+                    <div class="security-card-desc">The ESCALATE message type is a first-class protocol primitive. Any agent can surface a decision to a human operator without breaking the task chain.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Comparison ── -->
+    <section class="ent-section" id="compare">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label">// comparison</div>
+                <h2 class="ent-h2">How it stacks up.</h2>
+                <p class="ent-desc">
+                    Evaluated against the most common alternatives for enterprise multi-agent coordination.
+                </p>
+            </div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th style="width: 220px;">Capability</th>
+                        <th class="highlight">0x01 Enterprise</th>
+                        <th>Google A2A</th>
+                        <th>Microsoft AutoGen</th>
+                        <th>Custom RPC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fully self-hosted</td>
+                        <td class="highlight"><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span> cloud-dependent</td>
+                        <td><span class="partial">~</span> partial</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>No vendor lock-in</td>
+                        <td class="highlight"><span class="check">✓</span> MIT license</td>
+                        <td><span class="cross">✗</span> proprietary</td>
+                        <td><span class="partial">~</span> open source</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cryptographic agent identity</td>
+                        <td class="highlight"><span class="check">✓</span> Ed25519</td>
+                        <td><span class="partial">~</span> OAuth only</td>
+                        <td><span class="cross">✗</span> none</td>
+                        <td><span class="cross">✗</span> DIY</td>
+                    </tr>
+                    <tr>
+                        <td>Decentralized discovery (no broker)</td>
+                        <td class="highlight"><span class="check">✓</span> Kademlia DHT</td>
+                        <td><span class="cross">✗</span> central registry</td>
+                        <td><span class="cross">✗</span> central hub</td>
+                        <td><span class="cross">✗</span> DIY</td>
+                    </tr>
+                    <tr>
+                        <td>Structured delegation schema</td>
+                        <td class="highlight"><span class="check">✓</span> 12 message types</td>
+                        <td><span class="partial">~</span> task only</td>
+                        <td><span class="partial">~</span> conversational</td>
+                        <td><span class="cross">✗</span> none</td>
+                    </tr>
+                    <tr>
+                        <td>Audit trail with signatures</td>
+                        <td class="highlight"><span class="check">✓</span></td>
+                        <td><span class="partial">~</span> cloud logs only</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span> DIY</td>
+                    </tr>
+                    <tr>
+                        <td>Human escalation primitive</td>
+                        <td class="highlight"><span class="check">✓</span> ESCALATE msg</td>
+                        <td><span class="partial">~</span></td>
+                        <td><span class="partial">~</span> human-in-loop</td>
+                        <td><span class="cross">✗</span> DIY</td>
+                    </tr>
+                    <tr>
+                        <td>Framework agnostic</td>
+                        <td class="highlight"><span class="check">✓</span> REST + WS</td>
+                        <td><span class="partial">~</span> gRPC / A2A SDK</td>
+                        <td><span class="cross">✗</span> Python only</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Air-gap compatible</td>
+                        <td class="highlight"><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ── Getting Started ── -->
+    <section class="ent-section ent-section-dark" id="getting-started">
+        <div class="wrap-wide">
+            <div class="ent-section-header">
+                <div class="ent-label ent-label-green">// getting started</div>
+                <h2 class="ent-h2">Up in three steps.</h2>
+                <p class="ent-desc">
+                    From zero to a working private agent mesh in under 10 minutes on any Linux host.
+                </p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">
+                        <span class="step-num-val">01</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-content-title">Pull and configure</div>
+                        <div class="step-content-desc">
+                            Clone the enterprise repository and copy the example environment file.
+                            The only required configuration is a keypair path and aggregator URL.
+                        </div>
+                        <div class="code-wrap">
+                            <div class="code-wrap-header">
+                                <span class="code-wrap-title">shell</span>
+                                <span class="code-wrap-lang">SH</span>
+                            </div>
+                            <pre><span class="prompt">$</span> git clone https://github.com/0x01-a2a/enterprise
+<span class="prompt">$</span> cd enterprise && cp .env.example .env
+<span class="prompt">$</span> <span class="cm"># edit .env: set KEYPAIR_PATH, AGGREGATOR_URL, BOOTSTRAP_ADDRS</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">
+                        <span class="step-num-val">02</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-content-title">Start the mesh</div>
+                        <div class="step-content-desc">
+                            Docker Compose starts a bootstrap node, an aggregator, and a sample agent node.
+                            The mesh forms automatically. Check the aggregator dashboard to see agents join.
+                        </div>
+                        <div class="code-wrap">
+                            <div class="code-wrap-header">
+                                <span class="code-wrap-title">shell</span>
+                                <span class="code-wrap-lang">SH</span>
+                            </div>
+                            <pre><span class="prompt">$</span> docker compose up -d
+<span class="prompt">$</span> curl http://localhost:8080/agents
+<span class="cm"># → [{"agent_id": "...", "name": "bootstrap", ...}]</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">
+                        <span class="step-num-val">03</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-content-title">Connect your agents</div>
+                        <div class="step-content-desc">
+                            Point any agent framework at the local REST API. Send an ASSIGN envelope to
+                            delegate a task. Listen on the WebSocket inbox for inbound work.
+                        </div>
+                        <div class="code-wrap">
+                            <div class="code-wrap-header">
+                                <span class="code-wrap-title">send a task delegation</span>
+                                <span class="code-wrap-lang">SHELL</span>
+                            </div>
+                            <pre><span class="prompt">$</span> curl -X POST http://localhost:9090/envelopes/send \
+     -H <span class="str">'Content-Type: application/json'</span> \
+     -d <span class="str">'{
+       "msg_type": "ASSIGN",
+       "recipient_id": "&lt;target-agent-id&gt;",
+       "payload": {
+         "task": "summarize_report",
+         "deadline": "2026-03-15T18:00:00Z",
+         "context": { "doc_url": "s3://internal/q1-report.pdf" }
+       }
+     }'</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="ent-cta-section" id="contact">
+        <div class="wrap-wide">
+            <div class="ent-cta-box">
+                <div class="ent-label ent-label-amber" style="margin-bottom:16px;">// enterprise access</div>
+                <div class="ent-cta-box-title">Ready to deploy?</div>
+                <div class="ent-cta-box-desc">
+                    The enterprise build is available under a commercial license for production deployments.
+                    We offer onboarding support, architecture review, and SLA-backed maintenance contracts.
+                    Reach out to discuss your deployment requirements.
+                </div>
+                <div class="ent-cta-row">
+                    <a class="btn-primary" href="mailto:contact@0x01.world">→ contact@0x01.world</a>
+                    <a class="btn-secondary" href="https://github.com/0x01-a2a/enterprise" target="_blank" rel="noopener">↗ View on GitHub</a>
+                </div>
+                <div class="ent-contact-grid">
+                    <div class="ent-contact-item">
+                        <span class="ent-contact-item-label">License</span>
+                        <span class="ent-contact-item-val">Commercial — per-deployment or per-seat</span>
+                    </div>
+                    <div class="ent-contact-item">
+                        <span class="ent-contact-item-label">Support</span>
+                        <span class="ent-contact-item-val">Architecture review + onboarding included</span>
+                    </div>
+                    <div class="ent-contact-item">
+                        <span class="ent-contact-item-label">Response</span>
+                        <span class="ent-contact-item-val">&lt; 24h business day SLA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer class="ent-footer">
+        <div class="wrap-wide">
+            <div class="ent-footer-inner">
+                <div class="ent-footer-left">
+                    <img src="/logo.svg" alt="0x01" style="height: 22px;" />
+                    <span style="color:var(--dim); font-size:12px;">0x01 protocol — enterprise edition</span>
+                </div>
+                <div class="ent-footer-links">
+                    <a href="/">Public Protocol</a>
+                    <a href="/mobile.html">Mobile</a>
+                    <a href="https://github.com/0x01-a2a/enterprise" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/privacy.html">Privacy</a>
+                    <a href="mailto:contact@0x01.world">Contact</a>
+                </div>
+            </div>
         </div>
     </footer>
 

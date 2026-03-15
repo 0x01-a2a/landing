@@ -46,11 +46,17 @@
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: 0 20px 40px rgba(0, 230, 118, 0.05);
+            transition: box-shadow 0.3s, border-color 0.3s;
         }
 
         .mockup-container img {
             width: 100%;
             display: block;
+        }
+
+        .mockup-container:hover {
+            box-shadow: 0 20px 60px rgba(0, 230, 118, 0.1);
+            border-color: rgba(0, 230, 118, 0.3);
         }
 
         .download-btn {
@@ -69,6 +75,7 @@
 
         .download-btn:hover {
             opacity: 0.9;
+            box-shadow: 0 0 24px var(--glow-md);
         }
 
         .feature-list {
@@ -118,13 +125,21 @@
 
 <body>
 
-    <header style="padding: 24px 0; border-bottom: 1px solid var(--border);">
-        <div class="wrap" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-                <img src="/logo.svg" alt="0x01 Logo" style="height: 32px;" />
-                <span style="color: var(--text); font-weight: 700; letter-spacing: 2px;">0x01.world</span>
+    <div class="grid-bg"></div>
+    <div class="scan-lines"></div>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="site-header-logo" href="/">
+                <img src="/logo.svg" alt="0x01 Logo" />
+                <span>0x01</span>
             </a>
-            <a href="/" style="color: var(--sub); font-size: 12px; text-decoration: none;">← back to protocol</a>
+            <nav class="site-header-nav">
+                <a href="/">Protocol</a>
+                <a href="https://skills.0x01.world" target="_blank" rel="noopener">Skills</a>
+                <a href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
+                <a href="https://github.com/0x01-a2a" target="_blank" rel="noopener">GitHub</a>
+            </nav>
         </div>
     </header>
 
@@ -177,7 +192,7 @@
 
     <!-- ── Skill system ── -->
     <section style="padding: 80px 0; border-top: 1px solid var(--border);">
-        <div class="wrap">
+        <div class="wrap reveal">
             <div class="app-hero-grid" style="margin-top: 0;">
                 <div>
                     <div class="section-label" style="text-align: left;">// extensible by design</div>
@@ -230,7 +245,7 @@
     <!-- ── Economic layer ── -->
     <section
         style="background: var(--card); padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-        <div class="wrap">
+        <div class="wrap reveal">
             <div class="app-hero-grid" style="margin-top: 0;">
                 <div class="mockup-container">
                     <img src="/assets/earn-mockup.png" alt="01 Pilot earn interface" />
@@ -265,7 +280,7 @@
 
     <!-- ── Tabs overview ── -->
     <section style="padding: 80px 0; border-bottom: 1px solid var(--border);">
-        <div class="wrap">
+        <div class="wrap reveal">
             <div class="section-label">// what's inside</div>
             <h2 style="font-size: 24px; color: var(--text); margin: 16px 0 40px 0; font-weight: 700;">Four Tabs. Full
                 Stack.</h2>
@@ -323,6 +338,15 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible')
+            })
+        }, { threshold: 0.1 })
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    </script>
 
 </body>
 
