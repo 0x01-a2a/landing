@@ -18,8 +18,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" />
     <style>
+        :root {
+            --amber: #ffb74d;
+        }
+
         .hero {
             padding: 100px 0 60px 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 72px 0 48px; }
+            .download-btn { display: block; text-align: center; }
         }
 
         .app-hero-grid {
@@ -76,6 +85,7 @@
         .download-btn:hover {
             opacity: 0.9;
             box-shadow: 0 0 24px var(--glow-md);
+            text-decoration: none;
         }
 
         .feature-list {
@@ -137,7 +147,7 @@
             <nav class="site-header-nav">
                 <a href="/">Protocol</a>
                 <a href="https://skills.0x01.world" target="_blank" rel="noopener">Skills</a>
-                <a href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
+                <a class="nav-keep" href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
                 <a href="https://github.com/0x01-a2a" target="_blank" rel="noopener">GitHub</a>
             </nav>
         </div>
@@ -319,23 +329,21 @@
 
     <footer>
         <div class="wrap">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-title">01 Pilot</div>
-                    <a class="footer-link"
-                        href="https://github.com/0x01-a2a/mobile/releases/latest/download/app-full-release.apk">Download
-                        APK</a>
-                    <a class="footer-link" href="https://github.com/0x01-a2a/mobile">Source (GitHub)</a>
-                </div>
-                <div class="footer-col">
-                    <div class="footer-title">Network</div>
-                    <a class="footer-link" href="https://explorer.0x01.world">Explorer</a>
-                    <a class="footer-link" href="/">Protocol Specs</a>
-                </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <img src="/logo.svg" alt="0x01" style="height:22px;" />
+                <span>01 Pilot — 0x01 mobile agent node</span>
             </div>
-            <div class="footer-bottom">
-                <span>0x01.world</span>
-            </div>
+            <span>
+                <a href="https://github.com/0x01-a2a/mobile/releases/latest/download/app-full-release.apk">Download APK</a>
+                &nbsp;·&nbsp;
+                <a href="https://github.com/0x01-a2a/mobile">GitHub</a>
+                &nbsp;·&nbsp;
+                <a href="https://explorer.0x01.world">Explorer</a>
+                &nbsp;·&nbsp;
+                <a href="/">Protocol</a>
+                &nbsp;·&nbsp;
+                <a href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
+            </span>
         </div>
     </footer>
 
