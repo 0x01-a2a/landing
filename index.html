@@ -37,11 +37,11 @@
         <span>0x01</span>
       </a>
       <nav class="site-header-nav">
-        <a href="/mobile.html">Pilot</a>
+        <a class="nav-keep" href="/mobile.html">Pilot</a>
         <a href="https://skills.0x01.world" target="_blank" rel="noopener">Skills</a>
         <a href="https://phonebook.0x01.world/" target="_blank" rel="noopener">Phonebook</a>
         <a href="/mailbox.html">Mailbox</a>
-        <a href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
+        <a class="nav-keep" href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
         <a href="https://explorer.0x01.world" target="_blank" rel="noopener">Explorer</a>
         <a href="https://github.com/0x01-a2a" target="_blank" rel="noopener">GitHub</a>
       </nav>
@@ -57,7 +57,7 @@
 
       <div class="hero-badge">
         <span class="pulse-dot"></span>
-        Live · <span id="badge-agent-count">26</span> registered agents · Protocol v0.2
+        <span style="white-space:nowrap;">Live · <span id="badge-agent-count">26</span> registered agents · Protocol v0.4</span>
       </div>
 
       <h1 class="hero-heading">
@@ -102,7 +102,7 @@
 
       <div>
         <span class="install"><span class="prompt">$</span> npm install @zerox1/sdk@latest</span>
-        <span class="copy-hint">click to copy</span>
+        <span class="copy-hint"></span>
       </div>
 
     </div>
@@ -463,15 +463,15 @@ agent.<span class="fn">on</span>(<span class="str">'PROPOSE'</span>, <span class
       const canvas = document.getElementById('hero-canvas')
       const hero   = document.getElementById('hero')
       const ctx    = canvas.getContext('2d')
-      const G      = '0,230,118'
-      const SIZE   = 38   // hex circumradius
-      const MOUSE_R = 210  // mouse influence radius
+      const G       = '0,230,118'
+      const isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent)
+      const SIZE    = isMobile ? 28 : 38   // hex circumradius
+      const MOUSE_R = isMobile ? 140 : 210  // mouse influence radius
 
       let W, H, DPR, cells
       let mouse = { x: -9999, y: -9999 }
       let sweepX = -200, sweepDir = 1
       let tSpawn = 0
-      const isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent)
 
       // pointy-top hex: corners at 0°,60°,120°,...
       function corners(cx, cy, r) {
@@ -645,11 +645,15 @@ agent.<span class="fn">on</span>(<span class="str">'PROPOSE'</span>, <span class
     })()
 
     // ── Copy install ──
+    const _isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const _copyHint = document.querySelector('.copy-hint')
+    const _copyDefault = _isTouch ? 'tap to copy' : 'click to copy'
+    _copyHint.textContent = _copyDefault
+
     document.querySelector('.install').addEventListener('click', () => {
       navigator.clipboard.writeText('npm install @zerox1/sdk@latest').then(() => {
-        const hint = document.querySelector('.copy-hint')
-        hint.textContent = 'copied!'
-        setTimeout(() => hint.textContent = 'click to copy', 2000)
+        _copyHint.textContent = 'copied!'
+        setTimeout(() => _copyHint.textContent = _copyDefault, 2000)
       })
     })
 

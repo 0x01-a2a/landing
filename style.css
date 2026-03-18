@@ -542,7 +542,7 @@ section {
 }
 
 .pillar-code {
-  display: inline-block;
+  display: block;
   margin-top: 10px;
   font-size: 11px;
   color: var(--green);
@@ -551,6 +551,9 @@ section {
   border-radius: 4px;
   padding: 4px 10px;
   letter-spacing: 0.04em;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 @media (max-width: 640px) {
@@ -605,13 +608,16 @@ section {
 }
 
 .step-code {
-  display: inline-block;
+  display: block;
   font-size: 11px;
   color: var(--green);
   background: rgba(0, 230, 118, 0.05);
   border: 1px solid rgba(0, 230, 118, 0.1);
   border-radius: 4px;
   padding: 4px 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 /* ── Capability grid ── */
@@ -836,4 +842,9 @@ footer a:hover { color: var(--green); }
   .hero-tagline { font-size: 13px; }
   section { padding: 60px 0; }
   .cta-final { padding: 72px 0; }
+  .section-sub { margin-bottom: 28px; }
+  .hero-badge { font-size: 9.5px; letter-spacing: 0.1em; padding: 4px 12px; }
+  .install { max-width: 100%; box-sizing: border-box; }
+  pre { font-size: 11px; padding: 16px; }
+  footer .wrap { flex-direction: column; align-items: flex-start; }
 }
