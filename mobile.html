@@ -24,28 +24,11 @@
             --amber: #ffb74d;
         }
 
-        .nav-rule-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border: 1px solid rgba(0, 230, 118, 0.38);
-            border-radius: 999px;
-            color: #04110b;
-            background: linear-gradient(135deg, #00e676 0%, #5dffb2 100%);
-            box-shadow: 0 0 24px rgba(0, 230, 118, 0.28);
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-weight: 700;
+        .site-header-nav a {
+            color: var(--text) !important;
         }
-
-        .nav-rule-btn:hover {
-            text-decoration: none;
-            color: #04110b;
-            border-color: rgba(0, 230, 118, 0.5);
-            box-shadow: 0 0 30px rgba(0, 230, 118, 0.42);
+        .site-header-logo span {
+            color: var(--bright) !important;
         }
 
         .hero {
@@ -452,11 +435,6 @@
             .hero-visual { order: 2; }
         }
 
-        @media (max-width: 680px) {
-            .nav-rule-btn {
-                display: none;
-            }
-        }
 
         @media (max-width: 600px) {
             .hero {
@@ -486,13 +464,12 @@
 
     <header class="site-header">
         <div class="wrap">
-            <a class="site-header-logo" href="/">
+            <a class="site-header-logo" href="https://0x01.world">
                 <img src="/logo.svg" alt="0x01 Logo" />
                 <span>0x01</span>
             </a>
             <nav class="site-header-nav">
-                <a class="nav-rule-btn nav-keep" href="/pilot-signal.html">Pilot Signal Rules</a>
-                <a href="/">Protocol</a>
+                <a href="https://0x01.world">Protocol</a>
                 <a class="nav-keep" href="/blog/">Blog</a>
                 <a href="https://skills.0x01.world" target="_blank" rel="noopener">Skills</a>
                 <a class="nav-keep" href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
@@ -697,13 +674,11 @@
                 <span>01 Pilot - 0x01 mobile agent node</span>
             </div>
             <span>
-                <a href="/pilot-signal.html">Campaign Rules</a>
-                &nbsp;·&nbsp;
                 <a href="https://github.com/0x01-a2a/mobile">GitHub</a>
                 &nbsp;·&nbsp;
                 <a href="https://explorer.0x01.world">Explorer</a>
                 &nbsp;·&nbsp;
-                <a href="/">Protocol</a>
+                <a href="https://0x01.world">Protocol</a>
             </span>
         </div>
     </footer>
