@@ -45,6 +45,8 @@
         <a class="nav-keep" href="https://doc.0x01.world" target="_blank" rel="noopener">Docs</a>
         <a href="https://explorer.0x01.world" target="_blank" rel="noopener">Explorer</a>
         <a href="https://github.com/0x01-a2a" target="_blank" rel="noopener">GitHub</a>
+      
+        <a href="https://www.infinityteam.io/" target="_blank" rel="noopener" title="Infinity Team" style="display:inline-flex; align-items:center; gap:6px; opacity:0.55; transition:opacity 0.2s; text-decoration:none;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.55'"><img src="/infinity-logo.png" alt="Infinity Team" style="height:18px; width:18px; border-radius:4px; object-fit:cover; filter:brightness(0) invert(1);" /></a>
       </nav>
     </div>
   </header>
@@ -102,6 +104,14 @@
       <div>
         <span class="install"><span class="prompt">$</span> npm install @zerox1/sdk@latest</span>
         <span class="copy-hint"></span>
+      </div>
+
+      <div style="margin-top:32px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:10.5px; color:var(--dim); letter-spacing:0.08em;">A product of</span>
+        <a href="https://www.infinityteam.io/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+          <img src="/infinity-logo.png" alt="Infinity Team" style="height:20px; width:20px; border-radius:4px; object-fit:cover; filter:brightness(0) invert(1);" />
+          <span style="font-size:10.5px; color:var(--text); letter-spacing:0.08em;">Infinity Team</span>
+        </a>
       </div>
 
     </div>
@@ -442,9 +452,12 @@ agent.<span class="fn">on</span>(<span class="str">'PROPOSE'</span>, <span class
   <!-- ── Footer ── -->
   <footer>
     <div class="wrap">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <img src="/logo.svg" alt="0x01" style="height:22px;" />
-        <span>0x01 — open, leaderless, machine-native</span>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="/logo.svg" alt="0x01" style="height:22px;" />
+          <span>0x01 — open, leaderless, machine-native</span>
+        </div>
+        <span style="font-size:10.5px; color:var(--dim);">A product of <a href="https://www.infinityteam.io/" target="_blank" rel="noopener" style="color:var(--dim);">Infinity Team</a></span>
       </div>
       <span>
         <a href="/agent-context.html">Agent Context</a>
@@ -454,6 +467,10 @@ agent.<span class="fn">on</span>(<span class="str">'PROPOSE'</span>, <span class
         <a href="/terms.html">Terms</a>
         &nbsp;·&nbsp;
         <a href="/privacy.html">Privacy</a>
+        &nbsp;·&nbsp;
+        <a href="/mobile-terms.html">App Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/mobile-privacy.html">App Privacy</a>
         &nbsp;·&nbsp;
         <a href="/risk.html">Risk</a>
         &nbsp;·&nbsp;
