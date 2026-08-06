@@ -12,6 +12,7 @@
     content="The narrative is ready. The consumer infrastructure is not. 0x01 is closing the gaps between capable agents and markets people can trust." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://0x01.world/og-image.png" />
+  <meta property="og:image:alt" content="0x01 infrastructure for the agentic economy" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://www.0x01.world" />
@@ -20,6 +21,7 @@
   <meta name="twitter:description"
     content="Building the missing layers between capable agents and mass adoption." />
   <meta name="twitter:image" content="https://0x01.world/og-image.png" />
+  <meta name="twitter:image:alt" content="0x01 infrastructure for the agentic economy" />
   <meta name="theme-color" content="#080b09" />
   <link rel="canonical" href="https://www.0x01.world" />
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
@@ -35,7 +37,7 @@
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="0x01 home">
-      <span class="brand-mark">01</span>
+      <span class="brand-mark"><img src="/logo.svg" alt="" width="250" height="161" /></span>
       <span><b>0x01</b><small>Infrastructure in progress</small></span>
     </a>
     <nav aria-label="Primary navigation">
@@ -44,40 +46,36 @@
       <a href="#work">Current work</a>
     </nav>
     <a class="barter-link" href="https://zerox1-intent-exchange.vercel.app/">
-      <span><i></i> 01Barter</span><b>Live ↗</b>
+      <span>
+        <svg class="signal-icon" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4" /></svg>
+        01Barter
+      </span>
+      <b>Live <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></b>
     </a>
   </header>
 
   <main id="main">
     <section class="hero" id="top">
+      <picture class="hero-art" aria-hidden="true">
+        <img src="/agentic-infrastructure.webp" alt="" width="1536" height="1024" fetchpriority="high" />
+      </picture>
       <div class="hero-copy reveal">
-        <p class="eyebrow"><i></i> Infrastructure for the agentic economy</p>
+        <p class="eyebrow">
+          <svg class="signal-icon" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4" /></svg>
+          Infrastructure for the agentic economy
+        </p>
         <h1>Agents are ready. <em>The economy isn’t.</em></h1>
         <p class="hero-deck">0x01 builds the missing identity, coordination, delegation, negotiation, and settlement layers for mass adoption.</p>
         <div class="hero-actions">
-          <a class="primary-link" href="#gaps">See what’s missing <span>↓</span></a>
-          <a class="secondary-link" href="https://zerox1-intent-exchange.vercel.app/">Explore 01Barter <span>↗</span></a>
+          <a class="primary-link" href="#gaps">See what’s missing <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" /></svg></a>
+          <a class="secondary-link" href="https://zerox1-intent-exchange.vercel.app/">Explore 01Barter <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a>
         </div>
       </div>
-
-      <aside class="system-map reveal" aria-label="Agentic economy infrastructure status">
-        <header><span>MARKET READINESS / 0x01</span><i>BUILDING</i></header>
-        <div class="system-core">
-          <span>CAPABLE<br />AGENTS</span>
-          <i></i>
-          <strong>?</strong>
-          <i></i>
-          <span>CONSUMER<br />MARKET</span>
-        </div>
-        <ol>
-          <li><span>01</span><b>Identity &amp; authority</b><i>OPEN GAP</i></li>
-          <li><span>02</span><b>Private coordination</b><i>OPEN GAP</i></li>
-          <li><span>03</span><b>Capability delegation</b><i>OPEN GAP</i></li>
-          <li><span>04</span><b>Intent &amp; negotiation</b><i>IN PROGRESS</i></li>
-          <li><span>05</span><b>Consent &amp; settlement</b><i>IN PROGRESS</i></li>
-        </ol>
-        <footer><span>THE MODEL IS NOT THE MARKET.</span><b>THE MISSING LAYERS MATTER.</b></footer>
-      </aside>
+      <div class="hero-caption reveal" aria-label="Infrastructure thesis">
+        <span>Capable agents</span>
+        <span>Five missing layers</span>
+        <span>Usable markets</span>
+      </div>
     </section>
 
     <section class="thesis" id="thesis">
@@ -139,31 +137,35 @@
 
       <a class="barter-card reveal" href="https://zerox1-intent-exchange.vercel.app/">
         <div class="barter-card-copy">
-          <span><i></i> LIVE ON TESTNET</span>
+          <span>
+            <svg class="signal-icon" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4" /></svg>
+            LIVE ON TESTNET
+          </span>
           <h3>01Barter</h3>
           <p>An intent exchange for unique and tokenized assets. Humans publish acceptable outcomes, negotiate exact terms, and approve settlement themselves.</p>
-          <b>Open the live exchange ↗</b>
+          <b>Open the live exchange <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></b>
         </div>
-        <div class="barter-route" aria-label="Example 01Barter exchange routes">
-          <span>ASSET</span>
-          <i>→</i>
-          <div><b>ASSET</b><b>STABLECOIN</b><b>MIXED</b></div>
-        </div>
-        <small>HUMAN ↔ HUMAN NOW / AGENT-ASSISTED NEXT</small>
+        <figure class="barter-visual">
+          <img src="/01barter-exchange.webp" alt="An apartment presented alongside possible house, land, and mixed asset offers" width="1570" height="1001" loading="lazy" />
+        </figure>
+        <small>HUMAN TO HUMAN NOW / AGENT-ASSISTED NEXT</small>
       </a>
 
     </section>
 
     <section class="closing reveal">
-      <p class="eyebrow"><i></i> Infrastructure before autonomy</p>
+      <p class="eyebrow">
+        <svg class="signal-icon" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4" /></svg>
+        Infrastructure before autonomy
+      </p>
       <h2>Useful to people today.<br /><em>Ready for agents tomorrow.</em></h2>
       <p>0x01 is closing the gaps between a capable model and an economy people can actually enter.</p>
-      <a class="primary-link primary-link-light" href="https://zerox1-intent-exchange.vercel.app/">See the first live market <span>↗</span></a>
+      <a class="primary-link primary-link-light" href="https://zerox1-intent-exchange.vercel.app/">See the first live market <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <a class="brand" href="#top"><span class="brand-mark">01</span><span><b>0x01</b><small>Infrastructure in progress</small></span></a>
+    <a class="brand" href="#top"><span class="brand-mark"><img src="/logo.svg" alt="" width="250" height="161" /></span><span><b>0x01</b><small>Infrastructure in progress</small></span></a>
     <div class="footer-links">
       <a href="/terms.html">Terms</a>
       <a href="/privacy.html">Privacy</a>
