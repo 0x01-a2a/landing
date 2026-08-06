@@ -119,14 +119,6 @@ a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
 .barter-route b { align-items: center; border: 1px solid var(--line); display: flex; font-family: var(--mono); font-size: 7px; font-weight: 500; justify-content: center; }
 .barter-route b:first-child { border-color: var(--green); }
 .barter-card > small { bottom: 24px; color: var(--muted); font-family: var(--mono); font-size: 6px; letter-spacing: .08em; position: absolute; right: 28px; z-index: 1; }
-.work-index { border-left: 1px solid var(--line-dark); border-top: 1px solid var(--line-dark); display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 45px; }
-.work-index a { align-items: center; border-bottom: 1px solid var(--line-dark); border-right: 1px solid var(--line-dark); display: grid; gap: 17px; grid-template-columns: 35px 1fr auto; min-height: 120px; padding: 22px; transition: background 170ms ease, color 170ms ease; }
-.work-index a:hover { background: var(--ink); color: var(--paper); }
-.work-index a > span { color: var(--green-dark); font-family: var(--display); font-size: 22px; }
-.work-index a div { display: flex; flex-direction: column; }
-.work-index b { font-family: var(--display); font-size: 25px; font-weight: 400; }
-.work-index small { color: #697069; font-family: var(--mono); font-size: 6px; margin-top: 7px; text-transform: uppercase; }
-.work-index i { color: var(--green-dark); font-style: normal; }
 
 .closing { align-items: center; background: var(--ink); display: flex; flex-direction: column; min-height: 660px; justify-content: center; padding: 100px 30px; position: relative; text-align: center; }
 .closing::before { border: 1px solid var(--line); content: ""; inset: 28px; pointer-events: none; position: absolute; }
@@ -173,7 +165,6 @@ a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
   .gap-grid article:last-child { grid-column: 1 / -1; }
   .barter-card { grid-template-columns: 1fr; }
   .barter-route { min-height: 220px; }
-  .work-index { grid-template-columns: 1fr; }
   .site-footer { grid-template-columns: 1fr; }
 }
 
@@ -207,7 +198,6 @@ a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
   .barter-route { grid-template-columns: 1fr; min-height: 300px; }
   .barter-route > i { height: 38px; }
   .barter-card > small { bottom: 20px; left: 22px; right: auto; }
-  .work-index a { padding-left: 16px; padding-right: 16px; }
   .closing { min-height: 580px; padding-left: 18px; padding-right: 18px; }
   .closing::before { inset: 14px; }
   .closing h2 { font-size: clamp(54px, 15vw, 74px); }
