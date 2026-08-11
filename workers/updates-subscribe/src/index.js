@@ -79,6 +79,7 @@ async function syncToResend(env, email) {
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
       'Content-Type': 'application/json',
+      'User-Agent': '0x01-updates/1.0',
     },
     body: JSON.stringify({
       email,
@@ -94,7 +95,7 @@ async function syncToResend(env, email) {
   const contact = await resendResponse.json()
   await env.DB
     .prepare('UPDATE subscribers SET resend_contact_id = ?, resend_synced_at = ? WHERE email = ?')
-    .bind(contact.data?.id || null, new Date().toISOString(), email)
+    .bind(contact.data?.id || contact.id || null, new Date().toISOString(), email)
     .run()
 }
 
