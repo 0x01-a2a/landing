@@ -98,6 +98,29 @@ async function syncToResend(env, email) {
     .run()
 }
 
+async function syncPendingSubscribers(env) {
+  const pending = await env.DB
+    .prepare(`SELECT email FROM subscribers
+      WHERE status = 'subscribed' AND resend_synced_at IS NULL
+      ORDER BY subscribed_at ASC
+      LIMIT 100`)
+    .all()
+
+  let synced = 0
+  let failed = 0
+  for (const subscriber of pending.results) {
+    try {
+      await syncToResend(env, subscriber.email)
+      synced += 1
+    } catch (error) {
+      failed += 1
+      console.error('Resend catch-up sync failed', { message: error.message })
+    }
+  }
+
+  return { processed: pending.results.length, synced, failed }
+}
+
 export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get('Origin') || ''
@@ -109,7 +132,20 @@ export default {
     }
 
     if (url.pathname !== '/subscribe' || request.method !== 'POST') {
-      return response({ error: 'Not found.' }, 404, origin)
+      if (url.pathname !== '/internal/sync' || request.method !== 'POST') {
+        return response({ error: 'Not found.' }, 404, origin)
+      }
+
+      if (!env.SYNC_TOKEN || request.headers.get('Authorization') !== `Bearer ${env.SYNC_TOKEN}`) {
+        return response({ error: 'Not found.' }, 404, origin)
+      }
+
+      if (!env.RESEND_API_KEY || !env.RESEND_SEGMENT_ID) {
+        return response({ error: 'Resend is not configured.' }, 409, origin)
+      }
+
+      const result = await syncPendingSubscribers(env)
+      return response(result, 200, origin)
     }
 
     if (!ALLOWED_ORIGINS.has(origin)) {
