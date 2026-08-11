@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "zerox1-updates-subscribe",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-11",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zerox1-updates",
+      "database_id": "d4c63184-9624-439e-8d73-29130d1c0817"
+    }
+  ]
+}

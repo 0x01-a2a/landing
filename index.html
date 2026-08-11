@@ -163,7 +163,16 @@
       </p>
       <h2>Useful to people today.<br /><em>Ready for agents tomorrow.</em></h2>
       <p>0x01 is closing the gaps between a capable model and an economy people can actually enter.</p>
-      <a class="primary-link primary-link-light" href="#thesis">Read the thesis <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a>
+      <form class="subscribe-form subscribe-form-dark" data-subscribe-form data-subscribe-source="home" data-subscribe-endpoint="https://zerox1-updates-subscribe.guanyidu98.workers.dev/subscribe">
+        <label for="home-email">Get new updates</label>
+        <div class="subscribe-controls">
+          <input id="home-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required />
+          <input class="subscribe-honeypot" type="text" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" />
+          <button type="submit">Subscribe <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></button>
+        </div>
+        <p class="subscribe-note">Occasional updates. Unsubscribe anytime. <a href="/privacy.html">Privacy</a></p>
+        <p class="subscribe-feedback" data-subscribe-feedback role="status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
@@ -179,6 +188,7 @@
     <p>© <span id="year"></span> Infinity Team</p>
   </footer>
 
+  <script src="/subscribe.js" defer></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear()
 

@@ -66,10 +66,16 @@
         <h2>The first note is on its way.</h2>
         <p>We are setting up this publication before filling it with noise. The next post will begin the archive.</p>
       </header>
-      <a class="updates-subscribe reveal" href="mailto:contact@0x01.world?subject=0x01%20updates">
-        <span>Want to stay close?</span>
-        <b>Contact 0x01 <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></b>
-      </a>
+      <form class="subscribe-form subscribe-form-light reveal" data-subscribe-form data-subscribe-source="updates" data-subscribe-endpoint="https://zerox1-updates-subscribe.guanyidu98.workers.dev/subscribe">
+        <label for="updates-email">Get new updates</label>
+        <div class="subscribe-controls">
+          <input id="updates-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required />
+          <input class="subscribe-honeypot" type="text" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" />
+          <button type="submit">Subscribe <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></button>
+        </div>
+        <p class="subscribe-note">Occasional updates. Unsubscribe anytime. <a href="/privacy.html">Privacy</a></p>
+        <p class="subscribe-feedback" data-subscribe-feedback role="status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
@@ -85,6 +91,7 @@
     <p>© <span id="year"></span> Infinity Team</p>
   </footer>
 
+  <script src="/subscribe.js" defer></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear()
 
