@@ -22,11 +22,13 @@ Add the bot as an administrator. It needs permission to post messages in channel
 
 ## 3. Find chat IDs
 
-Post one test message in each chat, then open this URL in a browser (replace `TOKEN`):
+For a public channel, add the bot as an administrator, publish one test post, then open this URL in a browser (replace `TOKEN`):
 
 `https://api.telegram.org/botTOKEN/getUpdates`
 
-Copy the `chat.id` for the channel/group. Public channels may also use `@channelusername` as the chat ID.
+For a private ops group, add the bot as an administrator and send a command such as `/start` in the group before opening the URL. If the group is not visible in the response, use BotFather’s `/setprivacy` and choose `Disable`, then send another test message. Copy the `chat.id` for the channel/group. Public channels may also use `@channelusername` as the chat ID.
+
+The Worker does not configure a webhook, so `getUpdates` remains available for this setup.
 
 ## 4. Add Cloudflare secrets
 
@@ -37,7 +39,6 @@ cd www/workers/updates-subscribe
 wrangler secret put TELEGRAM_BOT_TOKEN
 wrangler secret put TELEGRAM_OPS_CHAT_ID
 wrangler secret put TELEGRAM_PUBLIC_CHAT_ID
-wrangler secret put TELEGRAM_MARKET_CHAT_ID   # optional; leave unset until 01Barter launches
 wrangler secret put SYNC_TOKEN
 ```
 
@@ -46,6 +47,8 @@ Use a long random value for `SYNC_TOKEN`. It protects the internal publish/listi
 ```sh
 wrangler deploy --keep-vars --config wrangler.jsonc
 ```
+
+Do not set `TELEGRAM_MARKET_CHAT_ID` yet. When 01Barter is publicly announced and its separate market channel exists, add it with `wrangler secret put TELEGRAM_MARKET_CHAT_ID`, then redeploy.
 
 ## 5. Publish an article
 
