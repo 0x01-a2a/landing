@@ -7,6 +7,7 @@ const ALLOWED_ORIGINS = new Set([
 
 const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000
 const RATE_LIMIT_MAX_ATTEMPTS = 5
+const TELEGRAM_MESSAGE_LIMIT = 4096
 
 function corsHeaders(origin) {
   const headers = new Headers({
@@ -29,6 +30,139 @@ function response(payload, status, origin) {
   const headers = corsHeaders(origin)
   headers.set('Content-Type', 'application/json; charset=utf-8')
   return new Response(JSON.stringify(payload), { status, headers })
+}
+
+function clip(value, length = TELEGRAM_MESSAGE_LIMIT - 96) {
+  const text = String(value || '').trim()
+  return text.length > length ? `${text.slice(0, length - 1).trimEnd()}…` : text
+}
+
+function escapeTelegramHtml(value) {
+  return String(value || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+}
+
+function safeHttpUrl(value, allowedPrefix) {
+  try {
+    const url = new URL(value)
+    if (url.protocol !== 'https:') return null
+    if (allowedPrefix && !url.href.startsWith(allowedPrefix)) return null
+    return url.href
+  } catch {
+    return null
+  }
+}
+
+async function telegramRequest(env, method, payload) {
+  if (!env.TELEGRAM_BOT_TOKEN) return null
+
+  const telegramResponse = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': '0x01-updates/1.0',
+    },
+    body: JSON.stringify(payload),
+  })
+
+  const result = await telegramResponse.json().catch(() => ({}))
+  if (!telegramResponse.ok || !result.ok) {
+    throw new Error(`Telegram ${method} failed with ${telegramResponse.status}`)
+  }
+
+  return result.result
+}
+
+async function sendTelegramMessage(env, chatId, text, options = {}) {
+  if (!chatId || !env.TELEGRAM_BOT_TOKEN) return null
+
+  return telegramRequest(env, 'sendMessage', {
+    chat_id: chatId,
+    text: clip(text),
+    parse_mode: 'HTML',
+    disable_web_page_preview: options.disableWebPagePreview === true,
+    disable_notification: options.disableNotification === true,
+  })
+}
+
+async function notifyTelegramSignup(env, source, totalSubscribers) {
+  if (!env.TELEGRAM_OPS_CHAT_ID) return null
+
+  return sendTelegramMessage(env, env.TELEGRAM_OPS_CHAT_ID, [
+    '<b>New 0x01 update signup</b>',
+    '',
+    `Source: <code>${escapeTelegramHtml(source)}</code>`,
+    `Active subscribers: <b>${totalSubscribers}</b>`,
+  ].join('\n'), { disableWebPagePreview: true })
+}
+
+function requireInternalAuth(request, env) {
+  return Boolean(env.SYNC_TOKEN)
+    && request.headers.get('Authorization') === `Bearer ${env.SYNC_TOKEN}`
+}
+
+async function publishArticleToTelegram(env, body) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_PUBLIC_CHAT_ID) {
+    return { error: 'Telegram bot and public channel are not configured.' }
+  }
+
+  const title = clip(body.title, 180)
+  const excerpt = clip(body.excerpt || body.text, 850)
+  const url = safeHttpUrl(body.url, 'https://www.0x01.world/updates/')
+  if (!title || !excerpt || !url) {
+    return { error: 'Article requires title, excerpt, and an 0x01 Updates URL.' }
+  }
+
+  const message = [
+    `<b>${escapeTelegramHtml(title)}</b>`,
+    '',
+    escapeTelegramHtml(excerpt),
+    '',
+    `<a href="${escapeTelegramHtml(url)}">Read the full note →</a>`,
+  ].join('\n')
+  const result = await sendTelegramMessage(env, env.TELEGRAM_PUBLIC_CHAT_ID, message)
+  return { messageId: result?.message_id || null, chatId: env.TELEGRAM_PUBLIC_CHAT_ID }
+}
+
+async function reviewBarterListingOnTelegram(env, body) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_OPS_CHAT_ID) {
+    return { error: 'Telegram bot and ops chat are not configured.' }
+  }
+
+  const name = clip(body.name || body.title, 180)
+  const url = safeHttpUrl(body.url)
+  if (!name || !url) return { error: 'Listing requires name and an HTTPS URL.' }
+
+  const details = [
+    body.network && `Network: <code>${escapeTelegramHtml(clip(body.network, 80))}</code>`,
+    body.price && `Price: <code>${escapeTelegramHtml(clip(body.price, 100))}</code>`,
+    body.seller && `Seller: <code>${escapeTelegramHtml(clip(body.seller, 120))}</code>`,
+  ].filter(Boolean)
+  const status = body.approved === true ? 'Approved for public market feed' : 'Needs review'
+  const message = [
+    '<b>01Barter listing review</b>',
+    '',
+    `<b>${escapeTelegramHtml(name)}</b>`,
+    ...details,
+    `Status: <b>${escapeTelegramHtml(status)}</b>`,
+    '',
+    `<a href="${escapeTelegramHtml(url)}">Open listing</a>`,
+  ].join('\n')
+
+  const opsResult = await sendTelegramMessage(env, env.TELEGRAM_OPS_CHAT_ID, message)
+  let publicResult = null
+  if (body.approved === true && env.TELEGRAM_MARKET_CHAT_ID) {
+    publicResult = await sendTelegramMessage(env, env.TELEGRAM_MARKET_CHAT_ID, message)
+  }
+
+  return {
+    opsMessageId: opsResult?.message_id || null,
+    publicMessageId: publicResult?.message_id || null,
+    publicPosted: Boolean(publicResult),
+  }
 }
 
 function isValidEmail(value) {
@@ -134,12 +268,43 @@ export default {
 
     if (url.pathname !== '/subscribe' || request.method !== 'POST') {
       if (url.pathname !== '/internal/sync' || request.method !== 'POST') {
+        if (!url.pathname.startsWith('/internal/telegram/') || request.method !== 'POST') {
+          return response({ error: 'Not found.' }, 404, origin)
+        }
+      }
+
+      if (!requireInternalAuth(request, env)) {
         return response({ error: 'Not found.' }, 404, origin)
       }
 
-      if (!env.SYNC_TOKEN || request.headers.get('Authorization') !== `Bearer ${env.SYNC_TOKEN}`) {
-        return response({ error: 'Not found.' }, 404, origin)
+      let body
+      try {
+        body = await request.json()
+      } catch {
+        return response({ error: 'Request body must be valid JSON.' }, 400, origin)
       }
+
+      if (url.pathname === '/internal/telegram/publish') {
+        try {
+          const result = await publishArticleToTelegram(env, body)
+          return response(result.error ? result : { ok: true, ...result }, result.error ? 409 : 200, origin)
+        } catch (error) {
+          console.error('Telegram article publish failed', { message: error.message })
+          return response({ error: 'Telegram publish failed.' }, 502, origin)
+        }
+      }
+
+      if (url.pathname === '/internal/telegram/listing') {
+        try {
+          const result = await reviewBarterListingOnTelegram(env, body)
+          return response(result.error ? result : { ok: true, ...result }, result.error ? 409 : 200, origin)
+        } catch (error) {
+          console.error('Telegram listing notification failed', { message: error.message })
+          return response({ error: 'Telegram listing notification failed.' }, 502, origin)
+        }
+      }
+
+      if (url.pathname !== '/internal/sync') return response({ error: 'Not found.' }, 404, origin)
 
       if (!env.RESEND_API_KEY || !env.RESEND_SEGMENT_ID) {
         return response({ error: 'Resend is not configured.' }, 409, origin)
@@ -174,6 +339,10 @@ export default {
       return response({ error: 'Please try again tomorrow.' }, 429, origin)
     }
 
+    const existing = await env.DB
+      .prepare('SELECT status FROM subscribers WHERE email = ?')
+      .bind(email)
+      .first()
     const now = new Date().toISOString()
     const source = body.source === 'updates' ? 'updates' : 'home'
     await env.DB
@@ -187,6 +356,18 @@ export default {
           unsubscribed_at = NULL`)
       .bind(email, source, now, now)
       .run()
+
+    const notifyNewSignup = !existing || existing.status === 'unsubscribed'
+    if (notifyNewSignup && env.TELEGRAM_OPS_CHAT_ID) {
+      ctx.waitUntil((async () => {
+        const count = await env.DB
+          .prepare("SELECT COUNT(*) AS count FROM subscribers WHERE status = 'subscribed'")
+          .first()
+        await notifyTelegramSignup(env, source, Number(count?.count || 0))
+      })().catch((error) => {
+        console.error('Telegram signup notification failed', { message: error.message })
+      }))
+    }
 
     ctx.waitUntil(
       syncToResend(env, email).catch((error) => {
